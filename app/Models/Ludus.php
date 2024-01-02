@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Ludus extends Model
 {
-    use HasFactory;
-
-    protected $table = 'ludi'; // Weird pluralization
+    protected $table = 'ludi'; // Weird latin pluralization
 
     protected $fillable = [
         'name',
