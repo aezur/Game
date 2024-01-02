@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Ludus;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -30,6 +32,16 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->ludus()->save(Ludus::make([
+                'owner' => $user->id,
+                'name' => $user->name.'\'s Ludus',
+            ]));
+        });
     }
 
     /**
