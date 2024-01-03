@@ -17,4 +17,9 @@ class Ludus extends Model
     {
         return $this->belongsTo(User::class, 'owner');
     }
+
+    public function gladiators()
+    {
+        return $this->hasMany(Gladiator::class, 'ludus');
+    }
 }
