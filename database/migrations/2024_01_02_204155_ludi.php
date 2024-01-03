@@ -13,7 +13,7 @@ return new class() extends Migration {
         Schema::create('ludi', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('owner')->references('id')->on('users');
+            $table->foreignId('owner')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

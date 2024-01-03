@@ -17,7 +17,8 @@ return new class() extends Migration {
                 ->foreignId('ludus')
                 ->nullable()
                 ->references('id')
-                ->on('ludi');
+                ->on('ludi')
+                ->onDelete('cascade');
 
             $table->string('name');
 
