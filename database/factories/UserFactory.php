@@ -38,8 +38,8 @@ class UserFactory extends Factory
     {
         return $this->afterCreating(function (User $user) {
             $user->ludus()->save(Ludus::make([
-                'owner' => $user->id,
                 'name' => $user->name.'\'s Ludus',
+                'user_id' => $user->id,
             ]));
         });
     }

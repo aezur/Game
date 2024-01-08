@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Gladiator extends Model
 {
@@ -17,7 +18,7 @@ class Gladiator extends Model
         'evasion',
     ];
 
-    public function ludus()
+    public function ludus(): BelongsTo
     {
         return $this->belongsTo(Ludus::class);
     }

@@ -10,16 +10,16 @@ class Ludus extends Model
 
     protected $fillable = [
         'name',
-        'owner',
+        'user_id',
     ];
 
     public function owner()
     {
-        return $this->belongsTo(User::class, 'owner');
+        return $this->belongsTo(User::class);
     }
 
     public function gladiators()
     {
-        return $this->hasMany(Gladiator::class, 'ludus');
+        return $this->hasMany(Gladiator::class);
     }
 }

@@ -22,7 +22,7 @@ class GladiatorFactory extends Factory
             'defense' => $this->faker->numberBetween(1, 10),
             'accuracy' => $this->faker->numberBetween(1, 10),
             'evasion' => $this->faker->numberBetween(1, 10),
-            'ludus' => null,
+            'ludus_id' => null,
         ];
     }
 }

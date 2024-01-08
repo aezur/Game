@@ -35,7 +35,7 @@ class GladiatorDTO
             'defense' => $this->defense,
             'accuracy' => $this->accuracy,
             'evasion' => $this->evasion,
-            'ludus' => $this->ludus,
+            'ludus_id' => $this->ludus,
         ]);
     }
 }

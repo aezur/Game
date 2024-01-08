@@ -13,12 +13,11 @@ return new class() extends Migration {
         Schema::create('gladiators', function (Blueprint $table) {
             $table->id();
 
+            $table->unsignedBigInteger('ludus_id')->nullable();
             $table
-                ->foreignId('ludus')
-                ->nullable()
-                ->references('id')
-                ->on('ludi')
-                ->onDelete('cascade');
+                ->foreign('ludus_id')
+                ->references('id')->on('ludi')
+                ->cascadeOnDelete();
 
             $table->string('name');
 

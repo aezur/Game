@@ -20,7 +20,7 @@ class CreateNewLudus
     {
         $event->user->ludus()->create([
             'name' => $event->user->name."'s Ludus",
-            'owner' => $event->user->id,
+            'user_id' => $event->user->id,
         ]);
     }
 }

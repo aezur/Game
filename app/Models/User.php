@@ -47,12 +47,12 @@ class User extends Authenticatable
 
     public function ludus()
     {
-        return $this->hasOne(Ludus::class, 'owner');
+        return $this->hasOne(Ludus::class);
     }
 
     public function gladiators()
     {
-        return $this->hasManyThrough(Gladiator::class, Ludus::class, 'owner', 'ludus_id');
+        return $this->hasManyThrough(Gladiator::class, Ludus::class, 'ludus_id', 'user_id');
     }
 
     public function marketAccess()

@@ -13,8 +13,13 @@ return new class() extends Migration {
         Schema::create('market_access', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->cascadeOnDelete();
+
             $table->date('date');
+
             $table->unique(['user_id', 'date']);
 
             $table->string('seed');
