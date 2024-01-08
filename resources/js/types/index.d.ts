@@ -26,6 +26,11 @@ export interface Gladiator extends Timestamps {
   ludus: number | null;
 }
 
+export interface MarketGladiator extends Gladiator {
+  price: number;
+  purchased: boolean;
+}
+
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
   auth: {
     user: User;
