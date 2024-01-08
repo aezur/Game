@@ -5,6 +5,8 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import { useEffect, useMemo, useState } from "react";
 import { useAxios } from "@/Hooks/useAxios";
 import { useErrorHandler } from "@/Hooks/useErrorHandler";
+import { router } from "@inertiajs/core";
+import Card from "@/Components/Card";
 
 export default function Market({
   auth,
@@ -14,6 +16,10 @@ export default function Market({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { axios } = useAxios();
   const { handleError } = useErrorHandler();
+
+  const leftToPurchase = useMemo(() => {
+    return gladiators.filter((g) => !g.purchased).length;
+  }, [gladiators]);
 
   const purchase = async (id: number) => {
     try {
@@ -34,7 +40,7 @@ export default function Market({
     }
   };
 
-  function Header() {
+  function Countdown() {
     const [counter, setCounter] = useState(
       // Seconds to midnight
       24 * 60 * 60 -
@@ -44,6 +50,10 @@ export default function Market({
     );
 
     useEffect(() => {
+      // If the counter is 0, reload the page to refresh the gladiator list
+      if (counter <= 0) {
+        router.reload();
+      }
       const timer =
         counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
       return () => {
@@ -61,12 +71,9 @@ export default function Market({
     }, [counter]);
 
     return (
-      <div className="w-full flex justify-between">
-        <h1 className="text-2xl">Novices</h1>
-        <p>
-          Refreshes in <pre className="inline">{formattedCounter}</pre>
-        </p>
-      </div>
+      <p>
+        Refreshes in <pre className="inline">{formattedCounter}</pre>
+      </p>
     );
   }
 
@@ -127,19 +134,20 @@ export default function Market({
     <AuthenticatedLayout
       user={auth.user}
       header={
-        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          Market
-        </h2>
+        <div className="w-full flex justify-between text-gray-800 dark:text-gray-200">
+          <h2 className="font-semibold text-xl leading-tight">Market</h2>
+          <Countdown />
+        </div>
       }
     >
       <Head title="Market" />
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900 dark:text-gray-100">
-            <Header />
+          <Card className="mb-8">
+            <h3 className="font-semibold text-xl leading-tight">The Dregs</h3>
             <FlavorText />
-            <TableHeader />
+            {leftToPurchase > 0 && <TableHeader />}
             <div>
               {gladiators?.map((g: MarketGladiator) => {
                 return g.purchased ? (
@@ -149,7 +157,7 @@ export default function Market({
                 );
               })}
             </div>
-          </div>
+          </Card>
         </div>
       </div>
     </AuthenticatedLayout>
