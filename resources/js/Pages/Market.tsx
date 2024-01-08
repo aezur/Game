@@ -52,7 +52,7 @@ export default function Market({
     useEffect(() => {
       // If the counter is 0, reload the page to refresh the gladiator list
       if (counter <= 0) {
-        router.reload();
+        router.reload({ preserveScroll: true });
       }
       const timer =
         counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
