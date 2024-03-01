@@ -2,10 +2,9 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { MarketGladiator, PageProps } from "@/types";
 import PrimaryButton from "@/Components/PrimaryButton";
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { useAxios } from "@/Hooks/useAxios";
 import { useErrorHandler } from "@/Hooks/useErrorHandler";
-import { router } from "@inertiajs/core";
 import Card from "@/Components/Card";
 import Modal from "@/Components/Modal";
 import SecondaryButton from "@/Components/SecondaryButton";
@@ -34,6 +33,7 @@ export default function Market({
 
   const closeModal = () => {
     setShowModal(false);
+
     // Wait for the modal to close before resetting the selected gladiator
     setSelectedGladiator(undefined);
   };
@@ -47,6 +47,7 @@ export default function Market({
           if (g.id === id) {
             g.purchased = true;
           }
+
           return g;
         })
       );
@@ -113,7 +114,7 @@ export default function Market({
     return (
       <div className="py-2 text-2xl grid sm:grid-cols-8 border-b border-gray-600 grid-cols-2">
         {Object.entries(gladiator)
-          .filter(([key, value]) => key !== "id")
+          .filter(([key]) => key !== "id")
           .map(([key, value]) => (
             <Fragment key={key}>
               <h4 className="capitalize sm:hidden visible">{key}</h4>

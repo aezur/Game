@@ -1,14 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
 export function useAxios() {
-    const axiosInstance = axios.create({
-        baseURL: '/api',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        withCredentials: true,        
-    });
+  const axiosInstance = axios.create({
+    baseURL: "/api",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    withCredentials: true,
+  });
 
-    return { axios: axiosInstance };
+  return { axios: axiosInstance };
 }

@@ -1,5 +1,4 @@
 export function useErrorHandler() {
-
   const handleError = (error: any) => {
     console.error(error);
     if (error.response) {
@@ -9,9 +8,9 @@ export function useErrorHandler() {
     } else if (error.request) {
       console.info(error.request);
     } else {
-      console.info('Error', error.message);
+      console.info("Error", error.message);
     }
-  }
+  };
 
   return { handleError };
 }

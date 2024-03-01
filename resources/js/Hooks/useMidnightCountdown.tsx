@@ -17,6 +17,7 @@ export function useMidnightCountdown() {
     }
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+
     return () => {
       if (timer) clearInterval(timer);
     };
@@ -26,6 +27,7 @@ export function useMidnightCountdown() {
     const hours = Math.floor(counter / 3600);
     const minutes = Math.floor((counter - hours * 3600) / 60);
     const seconds = counter - hours * 3600 - minutes * 60;
+
     return `${hours.toString().padStart(2, "0")}:${minutes
       .toString()
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
